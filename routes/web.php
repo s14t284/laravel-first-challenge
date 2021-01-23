@@ -21,43 +21,51 @@ Route::get('/', function () {
 //     return '<html><body><h1>Hello</h1><p>This is sample page.</p></body></html>';
 // });
 
-$html = <<<EOF
-<html>
-<head>
-<title>Hello</title>
-<style>
-body {font-size: 16pt; color: #999;}
-h1 {font-size: 100pt; text-align:right; color:#eee; margin: -40px 0px -50px 0px;}
-</style>
-</head>
-<body>
-<h1>Hello</h1>
-<p>This is sample page.</p>
-</body>
-</html>
-EOF;
-
-Route::get('hello', function() use ($html) {
-    return $html;
-});
+// $html = <<<EOF
+// <html>
+// <head>
+// <title>Hello</title>
+// <style>
+// body {font-size: 16pt; color: #999;}
+// h1 {font-size: 100pt; text-align:right; color:#eee; margin: -40px 0px -50px 0px;}
+// </style>
+// </head>
+// <body>
+// <h1>Hello</h1>
+// <p>This is sample page.</p>
+// </body>
+// </html>
+// EOF;
+//
+// Route::get('hello', function() use ($html) {
+//     return $html;
+// });
 
 // ルートパラメータの利用
 
-Route::get('/hello/{msg}', function($msg) {
-    return <<<EOF
-<html>
-<head>
-<title>Hello</title>
-<style>
-body {font-size: 16pt; color: #999;}
-h1 {font-size: 100pt; text-align:right; color:#eee; margin: -40px 0px -50px 0px;}
-</style>
-</head>
-<body>
-<h1>Hello</h1>
-<p>This is sample page.</p>
-<p>${msg}</p>
-</body>
-</html>
-EOF;
-});
+// Route::get('/hello/{msg}', function($msg) {
+//     return <<<EOF
+// <html>
+// <head>
+// <title>Hello</title>
+// <style>
+// body {font-size: 16pt; color: #999;}
+// h1 {font-size: 100pt; text-align:right; color:#eee; margin: -40px 0px -50px 0px;}
+// </style>
+// </head>
+// <body>
+// <h1>Hello</h1>
+// <p>This is sample page.</p>
+// <p>${msg}</p>
+// </body>
+// </html>
+// EOF;
+// });
+
+// Controller の利用
+
+Route::get('hello', 'App\Http\Controllers\HelloController@index');
+Route::get('hello/other', 'App\Http\Controllers\HelloController@other');
+Route::get('/hello/{id?}/{pass?}', 'App\Http\Controllers\HelloController@indexWithRouteParams');
+Route::get('single', 'App\Http\Controllers\SingleActionController');
+Route::get('reqres', 'App\Http\Controllers\UseRequestResponseController@index');
