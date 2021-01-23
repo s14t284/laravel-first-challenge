@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\Myrule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Requests\HelloRequest;
+use Illuminate\Support\Facades\Validator;
 
 global $head, $style, $body, $end;
 $head = '<html><head>';
@@ -39,22 +42,44 @@ class HelloController extends Controller
     //     return $html;
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('hello.index', ['msg'=>'']);
+        return view('hello.index', ['msg' => 'フォームを入力:']);
     }
 
-    public function post(Request $request) {
-        return view('hello.index', ['msg'=>$request->msg]);
+    public function post(HelloRequest $request)
+    {
+        // ここでもバリデーションできる
+        // $validate_rule = [
+        //     'name' => 'required',
+        //     'mail' => 'email',
+        //     'age' => 'numeric|between:0,150',
+        // ];
+        // $this->validate($request, $validate_rule);
+
+        // FormValidation
+        // return view('hello.index', ['msg' => '正しく入力されました']);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'mail' => 'email',
+            'age' => ['numeric', new Myrule(5)],
+        ]);
+        if ($validator->fails()) {
+            return redirect('/hello')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        return view('hello.index', ['msg' => '正しく入力されました']);
     }
 
     public function indexWithQueryString(Request $request)
     {
-       $data = [
-           'msg' => 'これはコントローラから渡されたメッセージです',
-           'id' => $request->id
-       ];
-       return view('hello.index', $data);
+        $data = [
+            'msg' => 'これはコントローラから渡されたメッセージです',
+            'id' => $request->id
+        ];
+        return view('hello.index', $data);
     }
 
     public function other(): string

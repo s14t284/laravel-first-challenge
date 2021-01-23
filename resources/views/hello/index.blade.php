@@ -8,17 +8,24 @@
 </head>
 <body>
     <h1>Blad/Index</h1>
-    @if ($msg != '')
     <p>{{$msg}}</p>
-    @else
-    <p>何か書いてください</p>
+    @if(count($errors) > 0)
+        <div>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li> {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
-    <form method="POST" action="/hello">
+    <form action="/hello" method="post">
+    <table>
         @csrf
-        <input type="text" name="msg">
-        <input type="submit">
+        <tr><th>name:</th><td><input type="text" name="name"></td></tr>
+        <tr><th>mail:</th><td><input type="text" name="mail"></td></tr>
+        <tr><th>age:</th><td><input type="text" name="age"></td></tr>
+        <tr><th></th><input type="submit" value="send" /></tr>
+    </table>
     </form>
-    <p>ViewComposer value<br>'view_message' = {{$view_message}}
-    </p>
 </body>
 </html>
