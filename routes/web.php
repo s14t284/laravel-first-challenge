@@ -64,7 +64,13 @@ Route::get('/', function () {
 
 // Controller の利用
 
+// Route::get('hello', 'App\Http\Controllers\HelloController@index');
+// Route::get('hello', function () {
+//     return view('hello.index');
+// });
+// Route::get('hello', 'App\Http\Controllers\HelloController@indexWithQueryString');
 Route::get('hello', 'App\Http\Controllers\HelloController@index');
+Route::post('hello', 'App\Http\Controllers\HelloController@post');
 Route::get('hello/other', 'App\Http\Controllers\HelloController@other');
 Route::get('/hello/{id?}/{pass?}', 'App\Http\Controllers\HelloController@indexWithRouteParams');
 Route::get('single', 'App\Http\Controllers\SingleActionController');

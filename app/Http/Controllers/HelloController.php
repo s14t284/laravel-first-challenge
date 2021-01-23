@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 global $head, $style, $body, $end;
 $head = '<html><head>';
@@ -25,17 +26,35 @@ class HelloController extends Controller
 {
 
 
-    public function index(): string
+    // public function index(): string
+    // {
+    //     global $head, $style, $body, $end;
+    //     $html = $head . tag('title', 'Hello/Index') . $style .
+    //         $body
+    //         . tag('h1', 'Index') . tag('p', 'this is Index page')
+    //         . '<a href="/hello/other">go to Other page</a>'
+    //         . '<br>'
+    //         . '<a href="/hello/1/pass">go to Use Route Param page</a>'
+    //         . $end;
+    //     return $html;
+    // }
+
+    public function index()
     {
-        global $head, $style, $body, $end;
-        $html = $head . tag('title', 'Hello/Index') . $style .
-            $body
-            . tag('h1', 'Index') . tag('p', 'this is Index page')
-            . '<a href="/hello/other">go to Other page</a>'
-            . '<br>'
-            . '<a href="/hello/1/pass">go to Use Route Param page</a>'
-            . $end;
-        return $html;
+        return view('hello.index', ['msg'=>'']);
+    }
+
+    public function post(Request $request) {
+        return view('hello.index', ['msg'=>$request->msg]);
+    }
+
+    public function indexWithQueryString(Request $request)
+    {
+       $data = [
+           'msg' => 'これはコントローラから渡されたメッセージです',
+           'id' => $request->id
+       ];
+       return view('hello.index', $data);
     }
 
     public function other(): string
@@ -49,7 +68,8 @@ class HelloController extends Controller
         return $html;
     }
 
-    public function indexWithRouteParams($id='1', $pass='pass'): string {
+    public function indexWithRouteParams($id = '1', $pass = 'pass'): string
+    {
         global $head, $style, $body, $end;
 
         $html = $head . tag('title', 'Hello/Index with route params') . $style .
