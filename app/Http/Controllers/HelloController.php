@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\Myrule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\HelloRequest;
@@ -62,7 +63,7 @@ class HelloController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'mail' => 'email',
-            'age' => 'numeric|between:0,150',
+            'age' => ['numeric', new Myrule(5)],
         ]);
         if ($validator->fails()) {
             return redirect('/hello')
