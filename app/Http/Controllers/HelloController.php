@@ -39,9 +39,9 @@ class HelloController extends Controller
     //     return $html;
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('hello.index', ['msg'=>'']);
+        return view('hello.index', ['data'=>$request->data, 'msg'=>'']);
     }
 
     public function post(Request $request) {

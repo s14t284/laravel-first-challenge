@@ -69,8 +69,12 @@ Route::get('/', function () {
 //     return view('hello.index');
 // });
 // Route::get('hello', 'App\Http\Controllers\HelloController@indexWithQueryString');
-Route::get('hello', 'App\Http\Controllers\HelloController@index');
-Route::post('hello', 'App\Http\Controllers\HelloController@post');
+Route::get('hello', 'App\Http\Controllers\HelloController@index')
+    ->middleware('hello'); // グローバルミドルウェアに登録されているのでこれはなくてもいい。グループミドルウェアの例
+
+//     ->middleware(\App\Http\Middleware\HelloMiddleware::class);
+// Route::post('hello', 'App\Http\Controllers\HelloController@post')
+//     ->middleware(\App\Http\Middleware\HelloMiddleware::class);
 Route::get('hello/other', 'App\Http\Controllers\HelloController@other');
 Route::get('/hello/{id?}/{pass?}', 'App\Http\Controllers\HelloController@indexWithRouteParams');
 Route::get('single', 'App\Http\Controllers\SingleActionController');

@@ -8,17 +8,10 @@
 </head>
 <body>
     <h1>Blad/Index</h1>
-    @if ($msg != '')
-    <p>{{$msg}}</p>
-    @else
-    <p>何か書いてください</p>
-    @endif
-    <form method="POST" action="/hello">
-        @csrf
-        <input type="text" name="msg">
-        <input type="submit">
-    </form>
     <p>ViewComposer value<br>'view_message' = {{$view_message}}
     </p>
+    <p>ここが本文のコンテンツです。</p>
+    <p>これは、<middleware>google.com</middleware>へのリンク</p>
+    <p>これは、<middleware>yahoo.co.jp</middleware>へのリンク</p>
 </body>
 </html>
