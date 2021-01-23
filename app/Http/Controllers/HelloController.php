@@ -39,13 +39,13 @@ class HelloController extends Controller
     //     return $html;
     // }
 
-    public function index($id = 'zero')
+    public function index()
     {
-        $data = [
-            'msg' => 'これはコントローラから渡されたメッセージです',
-            'id' => $id
-        ];
-        return view('hello.index', $data);
+        return view('hello.index', ['msg'=>'']);
+    }
+
+    public function post(Request $request) {
+        return view('hello.index', ['msg'=>$request->msg]);
     }
 
     public function indexWithQueryString(Request $request)
