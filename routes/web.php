@@ -73,8 +73,9 @@ Route::get('/', function () {
 //     ->middleware('hello'); // グローバルミドルウェアに登録されているのでこれはなくてもいい。グループミドルウェアの例
 //
 //     ->middleware(\App\Http\Middleware\HelloMiddleware::class);
-Route::get('hello', 'App\Http\Controllers\HelloController@index');
-Route::post('hello', 'App\Http\Controllers\HelloController@post');
+Route::get('hello', 'App\Http\Controllers\UseDBController@index');
+// Route::post('hello', 'App\Http\Controllers\HelloController@post');
+Route::get('hello/show', 'App\Http\Controllers\UseDBController@show');
 Route::get('hello/other', 'App\Http\Controllers\HelloController@other');
 Route::get('/hello/{id?}/{pass?}', 'App\Http\Controllers\HelloController@indexWithRouteParams');
 Route::get('single', 'App\Http\Controllers\SingleActionController');

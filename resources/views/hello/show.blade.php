@@ -8,16 +8,15 @@
     </style>
 </head>
 <body>
-    <h1>Blad/Index</h1>
-    <table>
-        <tr><th>Name</th><th>Mail</th><th>Age</th></tr>
+<table>
+    @if($items != null)
         @foreach($items as $item)
-            <tr>
-                <td>{{{$item->name}}}</td>
-                <td>{{{$item->mail}}}</td>
-                <td>{{{$item->age}}}</td>
-            </tr>
+            <tr><th>id: </th><td>{{$item->id}}</td></tr>
+            <tr><th>name: </th><td>{{$item->name}}</td></tr>
+            <tr><th>mail: </th><td>{{$item->mail}}</td></tr>
+            <tr><th>age: </th><td>{{$item->age}}</td></tr>
         @endforeach
-    </table>
+    @endif
+</table>
 </body>
 </html>
