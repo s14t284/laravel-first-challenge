@@ -73,7 +73,8 @@ Route::get('/', function () {
 //     ->middleware('hello'); // グローバルミドルウェアに登録されているのでこれはなくてもいい。グループミドルウェアの例
 //
 //     ->middleware(\App\Http\Middleware\HelloMiddleware::class);
-Route::get('hello', 'App\Http\Controllers\UseDBController@index');
+Route::get('hello', 'App\Http\Controllers\HelloController@index')->middleware('auth');
+// Route::get('hello', 'App\Http\Controllers\UseDBController@index');
 Route::get('person', 'App\Http\Controllers\PersonController@index');
 Route::get('person/find', 'App\Http\Controllers\PersonController@find');
 Route::post('person/find', 'App\Http\Controllers\PersonController@search');
@@ -86,10 +87,20 @@ Route::post('person/del', 'App\Http\Controllers\PersonController@remove');
 // Route::post('hello', 'App\Http\Controllers\HelloController@post');
 Route::get('hello/show', 'App\Http\Controllers\UseDBController@show');
 Route::get('hello/other', 'App\Http\Controllers\HelloController@other');
-Route::get('/hello/{id?}/{pass?}', 'App\Http\Controllers\HelloController@indexWithRouteParams');
+Route::get('hello/rest', 'App\Http\Controllers\HelloController@rest');
+// Route::get('/hello/{id?}/{pass?}', 'App\Http\Controllers\HelloController@indexWithRouteParams');
 Route::get('single', 'App\Http\Controllers\SingleActionController');
 Route::get('reqres', 'App\Http\Controllers\UseRequestResponseController@index');
 
 Route::get('board', 'App\Http\Controllers\BoardController@index');
 Route::get('board/add', 'App\Http\Controllers\BoardController@add');
 Route::post('board/add', 'App\Http\Controllers\BoardController@create');
+
+Route::resource('rest', 'App\Http\Controllers\RestappController');
+
+Route::get('hello/session', 'App\Http\Controllers\HelloController@ses_get');
+Route::post('hello/session', 'App\Http\Controllers\HelloController@ses_put');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
