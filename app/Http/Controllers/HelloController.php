@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Person;
 use App\Rules\Myrule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\HelloRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 global $head, $style, $body, $end;
@@ -44,7 +46,10 @@ class HelloController extends Controller
 
     public function index(Request $request)
     {
-        return view('hello.index', ['msg' => 'フォームを入力:']);
+        // return view('hello.index', ['msg' => 'フォームを入力:']);
+        $sort = $request->sort;
+        $items = Person::orderBy($sort, 'asc')->paginate(3);
+        return view('hello.index', ['items' => $items, 'sort' => $sort]);
     }
 
     public function post(HelloRequest $request)
