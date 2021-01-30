@@ -73,7 +73,7 @@ Route::get('/', function () {
 //     ->middleware('hello'); // グローバルミドルウェアに登録されているのでこれはなくてもいい。グループミドルウェアの例
 //
 //     ->middleware(\App\Http\Middleware\HelloMiddleware::class);
-Route::get('hello', 'App\Http\Controllers\HelloController@index');
+Route::get('hello', 'App\Http\Controllers\HelloController@index')->middleware('auth');
 // Route::get('hello', 'App\Http\Controllers\UseDBController@index');
 Route::get('person', 'App\Http\Controllers\PersonController@index');
 Route::get('person/find', 'App\Http\Controllers\PersonController@find');
