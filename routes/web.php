@@ -87,7 +87,7 @@ Route::post('person/del', 'App\Http\Controllers\PersonController@remove');
 Route::get('hello/show', 'App\Http\Controllers\UseDBController@show');
 Route::get('hello/other', 'App\Http\Controllers\HelloController@other');
 Route::get('hello/rest', 'App\Http\Controllers\HelloController@rest');
-Route::get('/hello/{id?}/{pass?}', 'App\Http\Controllers\HelloController@indexWithRouteParams');
+// Route::get('/hello/{id?}/{pass?}', 'App\Http\Controllers\HelloController@indexWithRouteParams');
 Route::get('single', 'App\Http\Controllers\SingleActionController');
 Route::get('reqres', 'App\Http\Controllers\UseRequestResponseController@index');
 
@@ -96,3 +96,6 @@ Route::get('board/add', 'App\Http\Controllers\BoardController@add');
 Route::post('board/add', 'App\Http\Controllers\BoardController@create');
 
 Route::resource('rest', 'App\Http\Controllers\RestappController');
+
+Route::get('hello/session', 'App\Http\Controllers\HelloController@ses_get');
+Route::post('hello/session', 'App\Http\Controllers\HelloController@ses_put');
