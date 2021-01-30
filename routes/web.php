@@ -74,9 +74,22 @@ Route::get('/', function () {
 //
 //     ->middleware(\App\Http\Middleware\HelloMiddleware::class);
 Route::get('hello', 'App\Http\Controllers\UseDBController@index');
+Route::get('person', 'App\Http\Controllers\PersonController@index');
+Route::get('person/find', 'App\Http\Controllers\PersonController@find');
+Route::post('person/find', 'App\Http\Controllers\PersonController@search');
+Route::get('person/add', 'App\Http\Controllers\PersonController@add');
+Route::post('person/add', 'App\Http\Controllers\PersonController@create');
+Route::get('person/edit', 'App\Http\Controllers\PersonController@edit');
+Route::post('person/edit', 'App\Http\Controllers\PersonController@update');
+Route::get('person/del', 'App\Http\Controllers\PersonController@delete');
+Route::post('person/del', 'App\Http\Controllers\PersonController@remove');
 // Route::post('hello', 'App\Http\Controllers\HelloController@post');
 Route::get('hello/show', 'App\Http\Controllers\UseDBController@show');
 Route::get('hello/other', 'App\Http\Controllers\HelloController@other');
 Route::get('/hello/{id?}/{pass?}', 'App\Http\Controllers\HelloController@indexWithRouteParams');
 Route::get('single', 'App\Http\Controllers\SingleActionController');
 Route::get('reqres', 'App\Http\Controllers\UseRequestResponseController@index');
+
+Route::get('board', 'App\Http\Controllers\BoardController@index');
+Route::get('board/add', 'App\Http\Controllers\BoardController@add');
+Route::post('board/add', 'App\Http\Controllers\BoardController@create');
