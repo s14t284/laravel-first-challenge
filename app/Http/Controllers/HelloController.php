@@ -107,4 +107,10 @@ class HelloController extends Controller
             . $end;
         return $html;
     }
+
+    public function rest(Request $request)
+    {
+       return view('hello.rest');
+    }
+
 }
